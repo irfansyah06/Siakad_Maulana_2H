@@ -38,15 +38,18 @@
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" value="{{ $Mahasiswa->jurusan }}" aria-describedby="Jurusan">
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="Address">Address</label>
-                        <input type="Address" name="Alamat" class="form-control" id="Address" value="{{ $Mahasiswa->Address }}" ariadescribedby="Address" >
-                    </div>
-
                     <div class="form-group">
-                        <label for="Date Of Birth">Date Of Birth</label>
-                        <input type="Date" name="Date Of Birth" class="form-control" id="DateOfBirth" value="{{ $Mahasiswa->DateOfBirth }}" ariadescribedby="DateOfBirth" >
-                    </div> --}}
+                        <label for="Email">Email</label>
+                        <input type="Email" name="Email" class="form-control" id="Email" value="{{ $Mahasiswa->email}}" ariadescribedby="Email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Tanggal_Lahir">Tanggal Lahir</label>
+                        <input type="Tanggal_Lahir" name="Tanggal_Lahir" class="form-control" id="Tanggal_Lahir" value="{{ $Mahasiswa->tanggal_lahir }}" ariadescribedby="Tanggal_Lahir" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Alamat">Alamat</label>
+                        <input type="Alamat" name="Alamat" class="form-control" id="Alamat" value="{{ $Mahasiswa->alamat }}" ariadescribedby="Alamat" >
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

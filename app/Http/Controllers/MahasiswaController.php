@@ -13,12 +13,18 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //fungsi eloquent menampilkan data menggunakan pagination
-        $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
-        $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(4);
-        return view('mahasiswa.index', ['mahasiswa' => $mahasiswa,'paginate'=>$paginate]);
+        //     $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
+        //     $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(4);
+        //     return view('mahasiswa.index', ['mahasiswa' => $mahasiswa,'paginate'=>$paginate]);
+        if($request->has('search')){
+            $mahasiswa = Mahasiswa::where('Nama', 'like', "%".$request->search."%")->paginate(4);
+        } else {
+            //fungsi eloquent menampilkan data menggunakan pagination
+            $mahasiswa = Mahasiswa::paginate(4); // Membuat pagination, setiap page, menampilkan 4 data
+        }
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -45,6 +51,9 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
+            'Email' => 'required',
+            'Tanggal_Lahir' => 'required',
+            'Alamat' => 'required',
     ]);
 
         //fungsi eloquent untuk menambah data
@@ -95,6 +104,9 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
+            'Email' => 'required',
+            'Tanggal_Lahir' => 'required',
+            'Alamat' => 'required',
         ]);
         //fungsi eloquent untuk mengupdate data inputan kita
         Mahasiswa::where('nim', $nim)
@@ -103,6 +115,10 @@ class MahasiswaController extends Controller
                 'nama'=>$request->Nama,
                 'kelas'=>$request->Kelas,
                 'jurusan'=>$request->Jurusan,
+                'email'=>$request->Email,
+                'tanggal_lahir'=>$request->Tanggal_Lahir,
+                'alamat'=>$request->Alamat,
+
         ]);
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')

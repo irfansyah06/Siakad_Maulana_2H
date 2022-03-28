@@ -11,6 +11,20 @@
     </div>
 </div>
 
+<div class="row justify-content-end">
+    <div class="col-md-4">
+        <form action="{{ route('mahasiswa.index') }}" accept-charset="UTF-8" method="get">
+            <div class="input-group">
+                <input type="text" name="search" id="search" placeholder="Cari..." class="form-control">
+                <span class="input-group-btn">
+                    <input type="submit" value="Cari" class="btn btn-primary">
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
@@ -28,7 +42,10 @@
         <th>Nama</th>
         <th>Kelas</th>
         <th>Jurusan</th>
-        <th width="280px">Action</th>
+        <th>Email</th>
+        <th>Tanggal Lahir</th>
+        <th>Alamat</th>
+        <th width="200px">Action</th>
     </tr>
     @foreach ($mahasiswa as $mhs)
     <tr>
@@ -37,6 +54,10 @@
         <td>{{ $mhs ->nama }}</td>
         <td>{{ $mhs ->kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>
+        <td>{{ $mhs ->email }}</td>
+        <td>{{ $mhs ->tanggal_lahir }}</td>
+        <td>{{ $mhs ->alamat }}</td>
+
         <td>
             <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->nim]) }}" method="POST">
 
@@ -50,5 +71,7 @@
     </tr>
     @endforeach
 </table>
-
+<div class="d-flex">
+    {{ $mahasiswa->links('pagination::bootstrap-4') }}
+</div>
 @endsection

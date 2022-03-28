@@ -13,6 +13,9 @@
                     <li class="list-group-item"><b>Nama: </b>{{$Mahasiswa->nama}}</li>
                     <li class="list-group-item"><b>Kelas: </b>{{$Mahasiswa->kelas}}</li>
                     <li class="list-group-item"><b>Jurusan: </b>{{$Mahasiswa->jurusan}}</li>
+                    <li class="list-group-item"><b>Email: </b>{{$Mahasiswa->email}}</li>
+                    <li class="list-group-item"><b>Tanggal Lahir: </b>{{$Mahasiswa->tanggal_lahir}}</li>
+                    <li class="list-group-item"><b>Alamat: </b>{{$Mahasiswa->alamat}}</li>
                     {{-- <li class="list-group-item"><b>Address: </b>{{$Mahasiswa->Address}}</li>
                     <li class="list-group-item"><b>Date Of Birth: </b>{{$Mahasiswa->DateOfBirth}}</li> --}}
                 </ul>
