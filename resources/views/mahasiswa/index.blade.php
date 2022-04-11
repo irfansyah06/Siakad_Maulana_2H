@@ -45,7 +45,7 @@
         <th>Email</th>
         <th>Tanggal Lahir</th>
         <th>Alamat</th>
-        <th width="280px">Action</th>
+        <th width="200px">Action</th>
     </tr>
     @foreach ($mahasiswa as $mhs)
     <tr>

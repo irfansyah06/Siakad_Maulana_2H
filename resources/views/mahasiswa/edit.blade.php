@@ -31,7 +31,7 @@
                         <input type="text" name="Nama" class="form-control" id="Nama" value="{{ $Mahasiswa->nama }}" aria-describedby="Nama">
                     </div>
                     <div class="form-group">
-                        <label for="Kelas">Kelas</label>
+                        <label for="Kelas"> Kelas </label>
                         <select name="Kelas" id="Kelas" class="form-control">
                             <option disabled>Pilih Kelas</option>
                         @foreach($kelas as $Kelas)

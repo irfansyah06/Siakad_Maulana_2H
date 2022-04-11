@@ -27,14 +27,14 @@
                         <input type="text" name="Nim" class="form-control" id="Nim" aria-describedby="Nim">
                     </div>
                     <div class="form-group">
-                        <label for="Nama">Nama</label>
+                        <label for="Nama"> Nama </label>
                         <input type="Nama" name="Nama" class="form-control" id="Nama" ariadescribedby="Nama">
                     </div>
                     <div class="form-group">
                         <label for="Kelas">Kelas</label>
                         <select name="Kelas" id="Kelas" class="form-control">
                             <option selected disabled>Pilih Kelas</option>
-                        @foreach($kelas as $Kelas)
+                        @foreach($kelas as $Kelas )
                             <option value="{{ $Kelas->id }}">{{ $Kelas->nama_kelas }}</option>
                         @endforeach
                         </select>
