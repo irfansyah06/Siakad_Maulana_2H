@@ -44,6 +44,10 @@
                         <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" ariadescribedby="Major">
                     </div>
                     <div class="form-group">
+                        <label for="image">Foto</label>
+                        <input type="file" name="image" class="form-control" id="image" required="required" aria-describedby="image" ></br>
+                    </div>
+                    <div class="form-group">
                         <label for="Email">Email</label>
                         <input type="Email" name="Email" class="form-control" id="Email" ariadescribedby="Email" >
                     </div>

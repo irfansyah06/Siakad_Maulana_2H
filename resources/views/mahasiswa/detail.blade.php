@@ -9,9 +9,10 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
+                    <img width="50px" height="50px" src="{{asset('storage/'.$Mahasiswa->image)}}" align="middle"></li>
                     <li class="list-group-item"><b>Nim: </b>{{$Mahasiswa->nim}}</li>
                     <li class="list-group-item"><b>Nama: </b>{{$Mahasiswa->nama}}</li>
-                    <li class="list-group-item"><b> Kelas: </b>{{$Mahasiswa->kelas->nama_kelas }}</li>
+                    <li class="list-group-item"><b>Kelas: </b>{{$Mahasiswa->kelas->nama_kelas }}</li>
                     <li class="list-group-item"><b>Jurusan: </b>{{$Mahasiswa->jurusan}}</li>
                     <li class="list-group-item"><b>Email: </b>{{$Mahasiswa->email}}</li>
                     <li class="list-group-item"><b>Tanggal Lahir: </b>{{$Mahasiswa->tanggal_lahir}}</li>

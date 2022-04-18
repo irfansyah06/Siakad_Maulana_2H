@@ -6,11 +6,16 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use App\Models\Mahasiswa_MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\File;
+use PDF;
+
 
 class MahasiswaController extends Controller
 {
     /**
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -57,16 +62,21 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
+            'image' => 'required',
             'Email' => 'required',
             'Tanggal_Lahir' => 'required',
             'Alamat' => 'required',
-    ]);
+        ]);
+        if ($request->file('image')) 
+        {
+            $image_name = $request->file('image')->store('images', 'public');
+        }
 
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('Nim');
         $mahasiswa->nama = $request->get('Nama');
         $mahasiswa->kelas_id = $request->get('Kelas');
-        $mahasiswa->jurusan = $request->get('Jurusan');
+        $mahasiswa->image = $image_name;
         $mahasiswa->email = $request->get('Email');
         $mahasiswa->tanggal_lahir = $request->get('Tanggal_Lahir');
         $mahasiswa->alamat = $request->get('Alamat');
@@ -127,14 +137,25 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
+            'image' => 'required',
             'Email' => 'required',
             'Tanggal_Lahir' => 'required',
             'Alamat' => 'required',
-        ]);
-        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();        $mahasiswa->nim = $request->get('Nim');
+        ]);    
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();   
+        // jika file image tersebut telah tersedia, maka file yang lama akan dihapus
+        if ($mahasiswa->image && file_exists(storage_path('app/public/' .$mahasiswa->image))) 
+        {
+            Storage::delete(['public/' . $mahasiswa->image]);
+        }
+        // namun, jika file image masih belum ada, maka file baru yang diupload akan disimpan
+        $image_name = $request->file('image')->store('images', 'public');
+        $mahasiswa->image = $image_name;     
+        $mahasiswa->nim = $request->get('Nim');
         $mahasiswa->nama = $request->get('Nama');
         $mahasiswa->kelas_id = $request->get('Kelas');
         $mahasiswa->jurusan = $request->get('Jurusan');
+        $mahasiswa->image = $image_name;
         $mahasiswa->email = $request->get('Email');
         $mahasiswa->tanggal_lahir = $request->get('Tanggal_Lahir');
         $mahasiswa->alamat = $request->get('Alamat');
@@ -178,5 +199,11 @@ class MahasiswaController extends Controller
             ->where('mahasiswa_id', $nim)
             ->get();
         return view('mahasiswa.nilai', compact('mahasiswa', 'nilai'));
+    }
+    public function cetak_khs($nim) 
+    {
+        $mahasiswa = Mahasiswa::findOrFail($nim);
+        $pdf = PDF::loadview('mahasiswa.khs_pdf',['mahasiswa'=>$mahasiswa]);
+        return $pdf->stream();
     }
 }
