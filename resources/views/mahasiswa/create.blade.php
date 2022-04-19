@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Foto</label>
-                        <input type="file" name="image" class="form-control" id="image" required="required" aria-describedby="image" ></br>
+                        <input type="file" name="image" class="form-control" id="image" required="required" aria-describedby="image" >
                     </div>
                     <div class="form-group">
                         <label for="Email">Email</label>

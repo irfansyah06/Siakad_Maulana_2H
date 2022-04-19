@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
-use App\Models\Kelas;
-use App\Models\Mahasiswa_MataKuliah;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\File;
 use PDF;
+use App\Models\Kelas;
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Mahasiswa_MataKuliah;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class MahasiswaController extends Controller
@@ -69,7 +69,7 @@ class MahasiswaController extends Controller
         ]);
         if ($request->file('image')) 
         {
-            $image_name = $request->file('image')->store('images', 'public');
+            $image_name = $request->file('image')->store('image', 'public');
         }
 
         $mahasiswa = new Mahasiswa;
@@ -144,12 +144,12 @@ class MahasiswaController extends Controller
         ]);    
         $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();   
         // jika file image tersebut telah tersedia, maka file yang lama akan dihapus
-        if ($mahasiswa->image && file_exists(storage_path('app/public/' .$mahasiswa->image))) 
+        if ($mahasiswa->image && file_exists(storage_path('./app/public/' .$mahasiswa->image))) 
         {
-            Storage::delete(['public/' . $mahasiswa->image]);
+            Storage::delete(['./public/', $mahasiswa->image]);
         }
         // namun, jika file image masih belum ada, maka file baru yang diupload akan disimpan
-        $image_name = $request->file('image')->store('images', 'public');
+        $image_name = $request->file('image')->store('image', 'public');
         $mahasiswa->image = $image_name;     
         $mahasiswa->nim = $request->get('Nim');
         $mahasiswa->nama = $request->get('Nama');
@@ -200,10 +200,24 @@ class MahasiswaController extends Controller
             ->get();
         return view('mahasiswa.nilai', compact('mahasiswa', 'nilai'));
     }
-    public function cetak_khs($nim) 
+    public function cetak_pdf($nim)
     {
-        $mahasiswa = Mahasiswa::findOrFail($nim);
-        $pdf = PDF::loadview('mahasiswa.khs_pdf',['mahasiswa'=>$mahasiswa]);
+    //     // dd('tetsing');
+        // $mhs = Mahasiswa::where('nim', $nim)->first();
+        // $nilai = mahasiswa_mataKuliah::where('mahasiswa_id', $mhs->id_mahasiswa)
+        //     ->with('matakuliah')
+        //     ->with('mahasiswa')
+        //     ->get();
+        // $nilai->mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
+        $mahasiswa = Mahasiswa_MataKuliah::with('mahasiswa')
+            ->where('mahasiswa_id', $nim)
+            ->first();
+        $nilai = mahasiswa_mataKuliah::with('matakuliah')
+            ->where('mahasiswa_id', $nim)
+            ->get();
+        $pdf = PDF::loadview('mahasiswa.khs_pdf', compact('mahasiswa', 'nilai'));
         return $pdf->stream();
     }
+
+  
 }

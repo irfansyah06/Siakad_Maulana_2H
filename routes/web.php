@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,9 @@ Route::get('/', function () {
 
 Route::resource('/mahasiswa', MahasiswaController::class);
 
-Route::get('/mahasiswa/nilai/{mahasiswa}', [MahasiswaController::class, 'nilai'])->name('mahasiswa.showNilai');
+Route::get('/mahasiswa/nilai/{nim}', [MahasiswaController::class, 'nilai'])->name('mahasiswa.showNilai');
 
-Route::get('/mahasiswa/cetak_khs/{Nim}', [MahasiswaController::class, 'cetak_khs'])->name('mahasiswa.pdf');
+Route::get('/mahasiswa/cetak_pdf/{nim}', [MahasiswaController::class, 'cetak_pdf'])->name('mahasiswa.pdf');
+
+// Route::get('mahasiswa/nilai/{nim}', [MahasiswaController::class, 'khs']);
+// Route::get('mahasiswa/nilai/{mahasiswa}/pdf', [MahasiswaController::class, 'cetak_pdf']);

@@ -56,7 +56,7 @@
         <td>{{ $mhs ->kelas->nama_kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>
         <td>
-            <img width="50px" height="50px" src="{{asset('storage/'.$mhs->image)}}">
+            <img width="50px" src="{{asset('image/'.$mhs->image)}}">
         </td>
         <td>{{ $mhs ->email }}</td>
         <td>{{ $mhs ->tanggal_lahir }}</td>

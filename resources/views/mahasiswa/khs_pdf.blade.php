@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print Kartu Hasil Studi (KHS)</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
@@ -15,40 +19,43 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
         crossorigin="anonymous"></script>
     </head>
+
+<body>
     <body>
         <div class="row">
             <div class="col-lg-12 margin-tb">
-                <div class="pull-left mt-2">
-                    <h2 align="center">JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
+                <div class="text-center mt-2">
+                    <h5>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h5>
                     <br>
-                    <h1 align="center">KARTU HASIL STUDI (KHS)</h1>
+                    <h5 class="text-center">KARTU HASIL STUDI (KHS)</h5>
                 </div>
-                <br><br>
-                <div class="float-left my-2">
-                    <p><strong>Nama :</strong> {{ $mahasiswa->nama }}</p>
-                    <p><strong>NIM :</strong> {{ $mahasiswa->nim }}</p>
-                    <p><strong>Kelas :</strong> {{ $mahasiswa->kelas->nama_kelas }}</p>
-                </div>
-                <br><br><br><br><br><br>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>Semester</th>
-                        <th>Nilai</th>
-                    </tr>
-                    @if($nilai)
-                    @foreach ($nilai as $Nilai)
-                    <tr>  
-                        <td>{{ $Nilai->matakuliah->nama_matkul }}</td>
-                        <td>{{ $Nilai->matakuliah->sks }}</td>
-                        <td>{{ $Nilai->matakuliah->semester }}</td>
-                        <td>{{ $Nilai->nilai }}</td>
-                    </tr>
-                    @endforeach
-                    @endif
-                </table>
             </div>
         </div>
-    </body>
+
+        <div class="container">
+            <p><strong>Nim&nbsp;: </strong>{{ $mahasiswa->mahasiswa->nim }}</p>
+            <p><strong>Nama&nbsp;: </strong>{{ $mahasiswa->mahasiswa->nama }}</p>
+            <p><strong>Kelas&nbsp;: </strong>{{ $mahasiswa->mahasiswa->Kelas->nama_kelas }}</p>
+            
+            <table class="table table-bordered">
+                <tr>
+                    <th>Matakuliah</th>
+                    <th>SKS</th>
+                    <th>Semester</th>
+                    <th>Nilai</th>
+                </tr>
+                @foreach($nilai as $Nilai)
+                <tr>
+                    <td>{{ $Nilai->matakuliah->nama_matkul }}</td>
+                    <td>{{ $Nilai->matakuliah->sks }}</td>
+                    <td>{{ $Nilai->matakuliah->semester }}</td>
+                    <td>{{ $Nilai->nilai }}</td>
+                </tr>
+            @endforeach
+
+            </table>
+        </div>
+</body>
+
 </html>
+
